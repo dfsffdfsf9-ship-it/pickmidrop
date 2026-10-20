@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1100" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <radialGradient id="bgGlow" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#4a154b" />
+      <stop offset="45%" stop-color="#1b0833" />
+      <stop offset="100%" stop-color="#0a0316" />
+    </radialGradient>
+
+    <linearGradient id="purpleGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff007f" />
+      <stop offset="50%" stop-color="#9d4edd" />
+      <stop offset="100%" stop-color="#ffd166" />
+    </linearGradient>
+
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe66d" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+
+    <linearGradient id="wheelRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd166" />
+      <stop offset="30%" stop-color="#9d4edd" />
+      <stop offset="70%" stop-color="#241552" />
+      <stop offset="100%" stop-color="#ff007f" />
+    </linearGradient>
+
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="1100" fill="url(#bgGlow)" />
+
+  <!-- Stars / Particles -->
+  <g fill="#e0aaff" opacity="0.6">
+    <circle cx="120" cy="180" r="2" />
+    <circle cx="680" cy="140" r="3" />
+    <circle cx="720" cy="380" r="2.5" />
+    <circle cx="90" cy="520" r="1.5" />
+    <circle cx="700" cy="780" r="3" />
+    <circle cx="150" cy="890" r="2" />
+    <circle cx="630" cy="940" r="2.5" />
+    <polygon points="200,280 203,288 211,291 203,294 200,302 197,294 189,291 197,288" fill="#ffd166" />
+    <polygon points="620,480 622,486 628,488 622,490 620,496 618,490 612,488 618,486" fill="#ff70a6" />
+  </g>
+
+  <!-- Top Ribbon Banner -->
+  <rect x="250" y="45" width="300" height="34" rx="17" fill="#241552" stroke="#9d4edd" stroke-width="2" />
+  <text x="400" y="68" fill="#e0aaff" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" letter-spacing="3">STEAM EDITION • SCHOOL PROJECT</text>
+
+  <!-- Logo Title -->
+  <text x="400" y="150" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="64" font-weight="900" text-anchor="middle" letter-spacing="2" filter="url(#neonGlow)">
+    Pickmi<tspan fill="#ff70a6">Drop</tspan>
+  </text>
+
+  <!-- Slogan -->
+  <text x="400" y="200" fill="url(#goldGradient)" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" letter-spacing="4">
+    ★ ИСПЫТАЙ УДАЧУ! ★
+  </text>
+
+  <!-- Central Roulette Wheel Art -->
+  <g transform="translate(400, 460)">
+    <!-- Outer Glow Rim -->
+    <circle r="195" fill="none" stroke="url(#wheelRim)" stroke-width="12" filter="url(#neonGlow)" />
+    <circle r="185" fill="#150a2b" stroke="#7b2cbf" stroke-width="4" />
+
+    <!-- Roulette Segments -->
+    <!-- 8 Segments -->
+    <path d="M 0 0 L 0 -180 A 180 180 0 0 1 127 -127 Z" fill="#2b0938" stroke="#5a189a" stroke-width="1.5" />
+    <path d="M 0 0 L 127 -127 A 180 180 0 0 1 180 0 Z" fill="#ff007f" opacity="0.85" stroke="#5a189a" stroke-width="1.5" />
+    <path d="M 0 0 L 180 0 A 180 180 0 0 1 127 127 Z" fill="#3c096c" stroke="#5a189a" stroke-width="1.5" />
+    <path d="M 0 0 L 127 127 A 180 180 0 0 1 0 180 Z" fill="#ffd166" opacity="0.9" stroke="#5a189a" stroke-width="1.5" />
+    <path d="M 0 0 L 0 180 A 180 180 0 0 1 -127 127 Z" fill="#240046" stroke="#5a189a" stroke-width="1.5" />
+    <path d="M 0 0 L -127 127 A 180 180 0 0 1 -180 0 Z" fill="#7209b7" stroke="#5a189a" stroke-width="1.5" />
+    <path d="M 0 0 L -180 0 A 180 180 0 0 1 -127 -127 Z" fill="#10002b" stroke="#5a189a" stroke-width="1.5" />
+    <path d="M 0 0 L -127 -127 A 180 180 0 0 1 0 -180 Z" fill="#f72585" opacity="0.8" stroke="#5a189a" stroke-width="1.5" />
+
+    <!-- Center Cap -->
+    <circle r="46" fill="#150a2b" stroke="#ffd166" stroke-width="5" />
+    <circle r="30" fill="url(#goldGradient)" />
+
+    <!-- Cute Ribbon / Bow on Top of Roulette -->
+    <g transform="translate(0, -185)">
+      <!-- Left Ribbon Wing -->
+      <path d="M 0 0 C -45 -45, -75 -15, -70 15 C -65 40, -25 25, 0 8 Z" fill="#ff4d8d" stroke="#ffe5ec" stroke-width="2.5" />
+      <path d="M -8 -2 C -35 -25, -55 -8, -50 12 Z" fill="#ff70a6" opacity="0.7" />
+      <!-- Right Ribbon Wing -->
+      <path d="M 0 0 C 45 -45, 75 -15, 70 15 C 65 40, 25 25, 0 8 Z" fill="#ff4d8d" stroke="#ffe5ec" stroke-width="2.5" />
+      <path d="M 8 -2 C 35 -25, 55 -8, 50 12 Z" fill="#ff70a6" opacity="0.7" />
+      <!-- Ribbon Tails -->
+      <path d="M -12 10 L -42 75 L -20 65 L -5 30 Z" fill="#d90429" opacity="0.9" />
+      <path d="M 12 10 L 42 75 L 20 65 L 5 30 Z" fill="#d90429" opacity="0.9" />
+      <!-- Knot -->
+      <ellipse cx="0" cy="4" rx="16" ry="14" fill="#ff70a6" stroke="#fff" stroke-width="2" />
+      <circle cx="-3" cy="2" r="3" fill="#fff" opacity="0.8" />
+    </g>
+  </g>
+
+  <!-- Tagline / Promo Text -->
+  <text x="400" y="710" fill="#ffffff" font-family="'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="800" text-anchor="middle" letter-spacing="1">
+    Открывай кейсы. Получай дропы.
+  </text>
+  <text x="400" y="745" fill="#c77dff" font-family="'Segoe UI', Roboto, sans-serif" font-size="18" text-anchor="middle">
+    CS &amp; Dota 2 • Бесплатный кейс с мусором • Голосовая озвучка рулетки
+  </text>
+
+  <!-- Prominent "Твой дроп ждёт!" Box -->
+  <g transform="translate(150, 785)">
+    <rect width="500" height="150" rx="20" fill="#241552" stroke="#ff007f" stroke-width="3" filter="url(#neonGlow)" />
+    <rect x="5" y="5" width="490" height="140" rx="16" fill="#1b0a33" opacity="0.9" />
+    
+    <text x="250" y="52" fill="#ffd166" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900" text-anchor="middle" letter-spacing="2">
+      ТВОЙ ДРОП ЖДЁТ!
+    </text>
+
+    <!-- Mini Features Pill Inside Box -->
+    <text x="250" y="90" fill="#e0aaff" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">
+      Шанс выбить: Яйцо Питомца • Pity-гарант • Ачивки
+    </text>
+
+    <!-- Call to Action Banner -->
+    <rect x="140" y="105" width="220" height="30" rx="15" fill="#f72585" />
+    <text x="250" y="125" fill="#ffffff" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="bold" text-anchor="middle" letter-spacing="1">
+      КРУТИ РУЛЕТКУ СЕЙЧАС!
+    </text>
+  </g>
+
+  <!-- Badges Grid at the Bottom -->
+  <g transform="translate(100, 970)">
+    <!-- Badge 1 -->
+    <rect x="0" y="0" width="180" height="55" rx="10" fill="#190933" stroke="#5a189a" stroke-width="1.5" />
+    <text x="90" y="24" fill="#ff70a6" font-size="12" font-weight="bold" text-anchor="middle">ПИТОМЕЦ</text>
+    <text x="90" y="42" fill="#d8b4fe" font-size="11" text-anchor="middle">Корми и повышай шансы</text>
+
+    <!-- Badge 2 -->
+    <rect x="210" y="0" width="180" height="55" rx="10" fill="#190933" stroke="#5a189a" stroke-width="1.5" />
+    <text x="300" y="24" fill="#ffd166" font-size="12" font-weight="bold" text-anchor="middle">ТЕСТ НА ДЕПРЕССИЮ</text>
+    <text x="300" y="42" fill="#d8b4fe" font-size="11" text-anchor="middle">После серии неудач</text>
+
+    <!-- Badge 3 -->
+    <rect x="420" y="0" width="180" height="55" rx="10" fill="#190933" stroke="#5a189a" stroke-width="1.5" />
+    <text x="510" y="24" fill="#4cc9f0" font-size="12" font-weight="bold" text-anchor="middle">БЕСПЛАТНЫЙ МУСОР</text>
+    <text x="510" y="42" fill="#d8b4fe" font-size="11" text-anchor="middle">Гарантированный лут</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="400" y="1065" fill="#7b2cbf" font-family="'Segoe UI', sans-serif" font-size="12" text-anchor="middle">
+    Школьный демонстрационный проект • PickmiDrop • Без реальных платежей
+  </text>
+</svg>

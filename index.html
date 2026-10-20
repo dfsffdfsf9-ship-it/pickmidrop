@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PickmiDrop — Испытай удачу! Открывай кейсы. Получай дропы.</title>
+  <style>
+    /* Dark Purple Gaming Theme */
+    :root {
+      --bg-dark: #0c0517;
+      --bg-card: #170b2c;
+      --bg-card-hover: #221040;
+      --purple-accent: #8b2fc9;
+      --purple-light: #c77dff;
+      --pink-neon: #ff007f;
+      --pink-light: #ff70a6;
+      --gold-accent: #ffd166;
+      --gold-bright: #ffe66d;
+      --text-main: #f8f9fa;
+      --text-muted: #b8a7d1;
+      --border-glow: rgba(157, 78, 221, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(139, 47, 201, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 85% 60%, rgba(255, 0, 127, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 15% 80%, rgba(88, 24, 153, 0.2) 0%, transparent 45%);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header / Nav */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(139, 47, 201, 0.2);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(12, 5, 23, 0.85);
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .logo-badge {
+      width: 48px;
+      height: 48px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #3c096c, #10002b);
+      border-radius: 50%;
+      border: 2px solid var(--gold-accent);
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+    }
+
+    .logo-wheel {
+      font-size: 22px;
+      animation: spin-slow 16s linear infinite;
+    }
+
+    .logo-bow {
+      position: absolute;
+      top: -8px;
+      right: -6px;
+      font-size: 18px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+
+    .brand-title {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .brand-title span {
+      color: var(--pink-light);
+    }
+
+    .header-badge {
+      background: rgba(157, 78, 221, 0.2);
+      color: var(--gold-accent);
+      border: 1px solid var(--purple-accent);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 60px 0 40px;
+    }
+
+    .slogan-pill {
+      display: inline-block;
+      background: linear-gradient(90deg, rgba(255, 0, 127, 0.2), rgba(157, 78, 221, 0.2));
+      border: 1px solid var(--pink-neon);
+      color: var(--gold-bright);
+      padding: 8px 24px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
+      animation: pulse-glow 2.5s infinite;
+    }
+
+    .hero-title {
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--purple-light) 75%, var(--pink-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 20px;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 35px;
+      line-height: 1.6;
+    }
+
+    /* Prominent "Твой дроп ждёт!" Section */
+    .drop-highlight-section {
+      margin: 40px 0 60px;
+    }
+
+    .drop-banner-card {
+      background: linear-gradient(145deg, #241144, #15092a);
+      border: 3px solid var(--purple-accent);
+      border-radius: 24px;
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 35px rgba(157, 78, 221, 0.35), inset 0 0 20px rgba(255, 0, 127, 0.1);
+      overflow: hidden;
+    }
+
+    .drop-banner-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 0, 127, 0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .drop-headline {
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--gold-accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(255, 209, 102, 0.5);
+      margin-bottom: 12px;
+    }
+
+    .drop-desc {
+      font-size: 18px;
+      color: var(--purple-light);
+      margin-bottom: 30px;
+    }
+
+    /* Interactive Drop Demonstration Box */
+    .demo-roulette-box {
+      background: #0e041d;
+      border: 1px solid rgba(255, 209, 102, 0.3);
+      border-radius: 18px;
+      max-width: 550px;
+      margin: 0 auto 28px;
+      padding: 24px;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.7);
+    }
+
+    .roulette-display {
+      font-size: 52px;
+      margin-bottom: 12px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .drop-result-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      min-height: 28px;
+    }
+
+    .drop-result-rarity {
+      font-size: 14px;
+      color: var(--gold-accent);
+      margin-top: 4px;
+      min-height: 20px;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, var(--pink-neon), #9d4edd);
+      color: white;
+      border: none;
+      padding: 16px 42px;
+      border-radius: 40px;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255, 0, 127, 0.5);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(255, 0, 127, 0.7);
+      background: linear-gradient(135deg, #ff1a8c, #b359f5);
+    }
+
+    .cta-button:active {
+      transform: translateY(1px);
+    }
+
+    /* Poster Section */
+    .poster-section {
+      padding: 40px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 30px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 35px;
+      font-size: 16px;
+    }
+
+    .poster-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .poster-frame {
+      max-width: 540px;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 3px solid var(--purple-accent);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(157, 78, 221, 0.4);
+      background: #110524;
+      transition: transform 0.3s ease;
+    }
+
+    .poster-frame:hover {
+      transform: scale(1.02);
+    }
+
+    .poster-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+      margin: 60px 0;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(139, 47, 201, 0.3);
+      border-radius: 18px;
+      padding: 26px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .feature-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-5px);
+      border-color: var(--pink-light);
+      box-shadow: 0 10px 25px rgba(255, 0, 127, 0.2);
+    }
+
+    .feature-icon {
+      font-size: 34px;
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+
+    .feature-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .feature-text {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* School Demo Helper Banner */
+    .school-banner {
+      background: rgba(36, 17, 68, 0.7);
+      border-left: 4px solid var(--gold-accent);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 40px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .school-banner-text h4 {
+      color: var(--gold-bright);
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .school-banner-text p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .demo-keys {
+      display: flex;
+      gap: 8px;
+    }
+
+    .key-badge {
+      background: #0e041d;
+      border: 1px solid var(--purple-accent);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--purple-light);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(139, 47, 201, 0.2);
+      padding: 35px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    footer p {
+      margin-bottom: 8px;
+    }
+
+    /* Animations */
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.9; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 34px; }
+      .drop-headline { font-size: 28px; }
+      .cta-button { font-size: 18px; padding: 14px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <div class="container nav-content">
+      <a href="#" class="brand-logo">
+        <div class="logo-badge">
+          <span class="logo-wheel">🎡</span>
+          <span class="logo-bow">🎀</span>
+        </div>
+        <div class="brand-title">Pickmi<span>Drop</span></div>
+      </a>
+      <div class="header-badge">Школьный проект • Демо</div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Hero Header -->
+    <section class="hero">
+      <div class="slogan-pill">✨ Испытай удачу! ✨</div>
+      <h1 class="hero-title">Открывай кейсы. Получай дропы.</h1>
+      <p class="hero-sub">
+        Симулятор открытия кейсов и рулетки в стиле CS и Dota. Выбивай легендарные скины, корми питомца мусором и соревнуйся с друзьями!
+      </p>
+    </section>
+
+    <!-- Prominent "Твой дроп ждёт!" Section -->
+    <section class="drop-highlight-section">
+      <div class="drop-banner-card">
+        <h2 class="drop-headline">🔥 Твой дроп ждёт! 🔥</h2>
+        <p class="drop-desc">Нажми на кнопку ниже, чтобы запустить тестовую рулетку и испытать удачу прямо сейчас</p>
+
+        <!-- Interactive Demo Box -->
+        <div class="demo-roulette-box">
+          <div class="roulette-display" id="rouletteIcon">🎁</div>
+          <div class="drop-result-title" id="dropTitle">Готов к открытию!</div>
+          <div class="drop-result-rarity" id="dropRarity">Нажми кнопку и посмотри, что выпадет</div>
+        </div>
+
+        <button class="cta-button" id="spinBtn" onclick="triggerLuckyDrop()">
+          <span>🎡 Крутить рулетку</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Promotional Poster Section -->
+    <section class="poster-section">
+      <h3 class="section-title">Рекламный постер проекта</h3>
+      <p class="section-sub">Официальный промо-постер для презентации игры на уроках и выставке проектов</p>
+      
+      <div class="poster-container">
+        <div class="poster-frame">
+          <!-- Checks for poster.png or poster.jpg, falls back smoothly to poster.svg -->
+          <img 
+            id="promoPosterImg" 
+            src="poster.png" 
+            alt="Рекламный постер PickmiDrop: Испытай удачу! Твой дроп ждёт!" 
+            class="poster-img"
+            onerror="if (!this.triedJpg) { this.triedJpg = true; this.src = 'poster.jpg'; } else if (!this.triedSvg) { this.triedSvg = true; this.src = 'poster.svg'; }"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Overview for Presentation -->
+    <section class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎙️</div>
+        <h3 class="feature-title">Озвучка рулетки</h3>
+        <p class="feature-text">Эмоциональные и забавные реплики комментатора при каждом вращении, победе и проигрыше.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🗑️</div>
+        <h3 class="feature-title">Бесплатный кейс с мусором</h3>
+        <p class="feature-text">Особый ежедневный кейс с горой забавных безделушек и скинов ширпотреба для каждого игрока.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🐣</div>
+        <h3 class="feature-title">Питомец-Тамагочи</h3>
+        <p class="feature-text">Выбей редкое яйцо! Корми питомца ненужными скинами, чтобы получать временный бонус к удаче.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📉</div>
+        <h3 class="feature-title">Тест на депрессию</h3>
+        <p class="feature-text">Интерактивный шуточный опросник для поднятия настроения после череды неудачных апгрейдов.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3 class="feature-title">Система гаранта (Pity)</h3>
+        <p class="feature-text">Каждая неудача накапливает счётчик гаранта, обеспечивая выпадение ценного приза.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3 class="feature-title">Достижения</h3>
+        <p class="feature-text">Десятки внутриигровых наград за смелость, терпение и заботу о питомце.</p>
+      </div>
+    </section>
+
+    <!-- School Demo Instructions Banner -->
+    <div class="school-banner">
+      <div class="school-banner-text">
+        <h4>💡 Подсказка для школьной защиты</h4>
+        <p>Для демонстрации учителю просто откройте этот файл в браузере и нажмите «Крутить рулетку» в блоке <b>«Твой дроп ждёт!»</b>.</p>
+      </div>
+      <div class="demo-keys">
+        <div class="key-badge">100% Офлайн</div>
+        <div class="key-badge">Без платежей</div>
+        <div class="key-badge">Безопасно</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p><b>PickmiDrop</b> — Школьный проект по программированию и рекламе игрового ПО.</p>
+      <p>Концепт игры в стиле "TrashDrop" • CS &amp; Dota skins simulator • Без реальных денежных ставок.</p>
+    </div>
+  </footer>
+
+  <!-- Interactive Demo Logic (No heavy libraries, zero dependencies) -->
+  <script>
+    const sampleDrops = [
+      { name: "P250 | Sand Dune (Ширпотреб)", rarity: "Ширпотреб • Мусор из бесплатного кейса", icon: "🔫", color: "#b0c3d9" },
+      { name: "Дроп: Золотое Яйцо Питомца! 🐣", rarity: "ЛЕГЕНДАРНЫЙ ДРОП! (+5% к шансам)", icon: "✨", color: "#ffd166" },
+      { name: "Ржавые наручи на Axe (Common)", rarity: "Dota 2 • Обычный дроп", icon: "🪓", color: "#5e98d9" },
+      { name: "Нож-бабочка | Градиент (★)", rarity: "ТАЙНОЕ ОРУЖИЕ! Мечта коллекционера", icon: "🗡️", color: "#eb4b4b" },
+      { name: "Шуточный сертификат «Мастер депрессии»", rarity: "Тест на депрессию пройден успешно!", icon: "📜", color: "#c77dff" },
+      { name: "Наклейка «Королева рулетки» 🎀", rarity: "Эксклюзив PickmiDrop", icon: "🎀", color: "#ff70a6" }
+    ];
+
+    let isSpinning = false;
+
+    // Simple synthesized Web Audio beep for spin feedback
+    function playTone(freq, duration) {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // AudioContext not allowed or not supported - silently ignore
+      }
+    }
+
+    function triggerLuckyDrop() {
+      if (isSpinning) return;
+      isSpinning = true;
+
+      const spinBtn = document.getElementById("spinBtn");
+      const iconEl = document.getElementById("rouletteIcon");
+      const titleEl = document.getElementById("dropTitle");
+      const rarityEl = document.getElementById("dropRarity");
+
+      spinBtn.disabled = true;
+      spinBtn.style.opacity = "0.7";
+      titleEl.innerText = "Рулетка крутится...";
+      rarityEl.innerText = "Слушаем комментатора озвучки...";
+
+      let counter = 0;
+      const icons = ["🎁", "⚔️", "🐣", "🔫", "🎀", "💎", "🔥"];
+
+      const interval = setInterval(() => {
+        iconEl.innerText = icons[counter % icons.length];
+        iconEl.style.transform = `rotate(${counter * 45}deg) scale(1.15)`;
+        playTone(300 + (counter * 35), 0.08);
+        counter++;
+      }, 100);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        const prize = sampleDrops[Math.floor(Math.random() * sampleDrops.length)];
+
+        iconEl.style.transform = "rotate(0deg) scale(1)";
+        iconEl.innerText = prize.icon;
+        titleEl.innerText = prize.name;
+        titleEl.style.color = prize.color;
+        rarityEl.innerText = prize.rarity;
+
+        playTone(600, 0.3);
+
+        spinBtn.disabled = false;
+        spinBtn.style.opacity = "1";
+        isSpinning = false;
+      }, 1800);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "name": "pickmidrop",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.11.0 <23.0.0",
+    "npm": ">=10.2.0"
+  },
+  "description": "Desktop skin drop & upgrade simulator for Steam featuring roulette voice-overs, depression test, pity system, and skin-eating pets.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "validate": "node scripts/validate.js",
+    "test": "node scripts/validate.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@octokit/rest": "^22.0.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.2.10",
+    "howler": "^2.2.4",
+    "lucide-react": "^0.383.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "steamworks.js": "^0.3.1",
+    "tailwind-merge": "^2.3.0",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/howler": "^2.2.11",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vitest": "^1.6.0"
+  }
+}

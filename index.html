@@ -555,6 +555,82 @@
 
   <!-- Interactive Demo Logic (No heavy libraries, zero dependencies) -->
   <script>
+        // PickmiDrop: безопасное техническое логирование
+ 
+const safeLogger = (() => {
+  const entries = [];
+
+  const redactText = (text) =>
+    String(text)
+      .replace(/\b\d{9,10}:[A-Za-z0-9_-]{35}\b/g, "[REDACTED_TOKEN]")
+      .replace(/\b[A-F0-9]{32}\b/gi, "[REDACTED_KEY]")
+      .replace(/(password|passwd|token|secret|api_?key|authorization|sessionid)=([^&\s"']+)/gi, "$1=[REDACTED]")
+      .replace(/Bearer\s+\S+/gi, "Bearer [REDACTED]")
+      .replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, "[REDACTED_EMAIL]");
+
+  const sensitiveKey =
+    /password|passwd|token|secret|api.?key|email|authorization|session|cookie|ticket|private.?key/i;
+
+  function sanitize(value) {
+    if (value instanceof Error) {
+      return {
+        name: redactText(value.name),
+        message: redactText(value.message)
+      };
+    }
+
+    if (typeof value === "string") return redactText(value);
+
+    if (Array.isArray(value)) return value.map(sanitize);
+
+    if (value && typeof value === "object") {
+      const result = {};
+      for (const [key, item] of Object.entries(value)) {
+        result[key] = sensitiveKey.test(key)
+          ? "[REDACTED]"
+          : sanitize(item);
+      }
+      return result;
+    }
+
+    return value;
+  }
+
+  function log(level, message, details = {}) {
+    const entry = {
+      timestamp: new Date().toISOString(),
+      level,
+      message: redactText(message),
+      details: sanitize(details)
+    };
+
+    entries.push(entry);
+    if (entries.length > 100) entries.shift();
+
+    const method = level === "ERROR" ? "error"
+      : level === "WARN" ? "warn" : "info";
+
+    console[method]("[PickmiDrop]", entry);
+  }
+
+  return {
+    log,
+    info: (message, details) => log("INFO", message, details),
+    warn: (message, details) => log("WARN", message, details),
+    error: (message, details) => log("ERROR", message, details)
+  };
+})();
+
+    window.addEventListener("error", (event) => {
+      safeLogger.log("ERROR", "JavaScript error", {
+        message: event.message,
+        line: event.lineno
+      });
+    });
+
+    window.addEventListener("unhandledrejection", () => {
+      safeLogger.log("ERROR", "Unhandled promise rejection");
+      });
     const sampleDrops = [
       { name: "P250 | Sand Dune (Ширпотреб)", rarity: "Ширпотреб • Мусор из бесплатного кейса", icon: "🔫", color: "#b0c3d9" },
       { name: "Дроп: Золотое Яйцо Питомца! 🐣", rarity: "ЛЕГЕНДАРНЫЙ ДРОП! (+5% к шансам)", icon: "✨", color: "#ffd166" },

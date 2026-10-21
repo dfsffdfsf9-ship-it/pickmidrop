@@ -655,11 +655,12 @@ const safeLogger = (() => {
         gain.connect(audioCtx.destination);
         osc.start();
         osc.stop(audioCtx.currentTime + duration);
-      } catch (e) {
-        // AudioContext not allowed or not supported - silently ignore
+           } catch (e) {
+        safeLogger.log("WARN", "Audio playback unavailable", {
+          message: e.message
+        });
       }
     }
-
     function triggerLuckyDrop() {
       if (isSpinning) return;
       isSpinning = true;

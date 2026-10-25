@@ -19,10 +19,11 @@
     "directories": {
       "output": "release"
     },
-    "files": [
-      "main.js",
-      "preload.js",
-      "index.html"
+   "files": [
+   "main.js",
+   "preload.js",
+   "package.json"
+
     ],
     "win": {
       "target": "portable"

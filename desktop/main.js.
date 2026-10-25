@@ -17,7 +17,7 @@ function createWindow() {
   });
 
   // Загружает существующий index.html из корня репозитория.
-  window.loadFile(path.join(__dirname, "..", "index.html"));
+     window.loadURL("https://pickmidrop.vercel.app/");
 }
 
 app.whenReady().then(() => {
